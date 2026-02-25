@@ -1,19 +1,16 @@
 Contact Management System
-
-(Data Structures and Algorithms Mini Project in C)
+A simple Data Structures & Algorithms mini project built in C++ using Linked List.
 ---------------------------------------------------------------------------------------------
 
 Overview
 
-The Contact Management System is a simple console-based application developed in C using the concept of Singly Linked List.
-This program allows users to store and manage contact details such as name, phone number, and email address.
+Contact Management System is a console-based program developed in C++ using Singly Linked List.
+It is used to store and manage contact information such as name, phone number, and email.
 
-The main aim of this project is to understand and apply Data Structures and Algorithms in a practical way.
-It provides a menu-driven interface where users can perform different operations on contacts.
+The main purpose of this project is to make learning Data Structures and Algorithms easier and more practical.
 
-This project helps in learning how linked lists work and how data can be added, searched, updated, and deleted dynamically.
+It demonstrates basic operations on linked lists in a simple and interactive way.
 ---------------------------------------------------------------------------------------------
-
 Features
 
 Add new contact
@@ -24,17 +21,16 @@ Search contact by name
 
 Update contact details
 
-Delete a contact
+Delete contact
 
-Menu-driven user interface
-
-Uses dynamic memory allocation
+Menu-driven program
 ---------------------------------------------------------------------------------------------
+
 Data Structures Implemented
 
 Singly Linked List
 
-Each node of the linked list stores:
+Each node stores:
 
 Name
 
@@ -42,92 +38,41 @@ Phone number
 
 Email
 
-Pointer to the next 
+Pointer to next node
 ---------------------------------------------------------------------------------------------
 
 Build Instructions
+
 Requirements
 
-C compiler (GCC or any standard compiler)
+C++ compiler (C++17 or newer)
 
-Command Prompt or Terminal
-
-Windows or Linux Operating System
+Any IDE or terminal (VS Code / Command Prompt)
 ---------------------------------------------------------------------------------------------
 
 Compilation Command
 
-To compile the program, use the following command:
+Use the following command to compile the program:
 
-gcc contact_management.c -o contact_management
+g++ main.cpp -o contact
+
+Run the program:
+
+contact.exe
 ---------------------------------------------------------------------------------------------
-Run the Program
-
-After compilation, run the program using:
-
-For Linux / Mac:
-
-./contact_management
-
-For Windows:
-
-contact_management.exe
----------------------------------------------------------------------------------------------
-Program Operations
-
-The program provides the following options in the menu:
-
-Add Contact
-
-Display Contacts
-
-Search Contact
-
-Update Contact
-
-Delete Contact
-
-Exit
-
-Each operation is implemented using linked list traversal and manipulation.
----------------------------------------------------------------------------------------------
-
-Sample Working
-
-User enters contact information
-
-Program stores the data in linked list nodes
-
-User can search contact by name
-
-User can update phone number or email
-
-User can delete any contact
-
-User can view all stored contacts
----------------------------------------------------------------------------------------------
-
 Technologies Used
 
-C Programming Language
+C++ Programming Language
+---------------------------------------------------------------------------------------------
 
-Linked List (Data Structure)
-
-Standard libraries: stdio.h, stdlib.h, string.h
+Data Structures (Linked List)
 
 Project Structure
 dsa_miniproject/
 │
-├── contact_management.c
-├── projectreport_manishkhatri_25.pdf
+├── main.cpp
 └── README.md
 ---------------------------------------------------------------------------------------------
-Educational Purpose
-
-This project is developed as a mini project for the Data Structures and Algorithms subject.
-It helps to understand the use of linked lists and improves programming and logical thinking skills.
----------------------------------------------------------------------------------------------
-
 Author
 
 Name: Manish Khatri
@@ -143,5 +88,5 @@ Department of Computer Engineering
 
 License
 
-This project is created only for academic and learning purposes.
+This project is created for academic and learning purposes only.
 It can be modified and used for educational use.
