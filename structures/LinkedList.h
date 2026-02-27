@@ -1,136 +1,109 @@
-#ifndef CONTACT_H
-#define CONTACT_H
+#ifndef LINKEDLIST_H
+#define LINKEDLIST_H
 
+#include "Contact.h"
 #include <iostream>
 #include <cstring>
 using namespace std;
 
-struct Contact {
-    char name[50];
-    char phone[15];
-    char email[50];
-    Contact *next;
+// Node for linked list
+struct Node {
+    Contact data;
+    Node* next;
 };
 
-Contact *head = NULL;
+class LinkedList {
+private:
+    Node* head;
 
-void addContact() {
-    Contact *newNode = new Contact;
+public:
+    LinkedList() {
+        head = NULL;
+    }
 
-    cout << "Enter Name: ";
-    cin.ignore();
-    cin.getline(newNode->name, 50);
+    // Add contact at the end
+    void addContact(Contact c) {
+        Node* newNode = new Node;
+        newNode->data = c;   // copy whole struct
+        newNode->next = NULL;
 
-    cout << "Enter Phone: ";
-    cin.getline(newNode->phone, 15);
+        if (head == NULL) {
+            head = newNode;
+        } else {
+            Node* temp = head;
+            while (temp->next != NULL)
+                temp = temp->next;
+            temp->next = newNode;
+        }
+        cout << "Contact added.\n";
+    }
 
-    cout << "Enter Email: ";
-    cin.getline(newNode->email, 50);
-
-    newNode->next = NULL;
-
-    if (head == NULL) {
-        head = newNode;
-    } else {
-        Contact *temp = head;
-        while (temp->next != NULL) {
+    // Display all contacts
+    void displayAll() {
+        if (head == NULL) {
+            cout << "No contacts.\n";
+            return;
+        }
+        Node* temp = head;
+        while (temp != NULL) {
+            cout << "Name  : " << temp->data.name << endl;
+            cout << "Phone : " << temp->data.phone << endl;
+            cout << "Email : " << temp->data.email << endl;
+            cout << "-------------------\n";
             temp = temp->next;
         }
-        temp->next = newNode;
     }
 
-    cout << "Contact added successfully.\n";
-}
-
-void displayContacts() {
-    if (head == NULL) {
-        cout << "No contacts available.\n";
-        return;
-    }
-
-    Contact *temp = head;
-
-    while (temp != NULL) {
-        cout << "Name  : " << temp->name << endl;
-        cout << "Phone : " << temp->phone << endl;
-        cout << "Email : " << temp->email << endl;
-        cout << "-------------------\n";
-        temp = temp->next;
-    }
-}
-
-void searchContact() {
-    char searchName[50];
-    cout << "Enter name to search: ";
-    cin.ignore();
-    cin.getline(searchName, 50);
-
-    Contact *temp = head;
-
-    while (temp != NULL) {
-        if (strcmp(temp->name, searchName) == 0) {
-            cout << "Contact Found:\n";
-            cout << "Name  : " << temp->name << endl;
-            cout << "Phone : " << temp->phone << endl;
-            cout << "Email : " << temp->email << endl;
-            return;
+    // Search by name (returns pointer to node, or NULL)
+    Node* searchByName(const char* name) {
+        Node* temp = head;
+        while (temp != NULL) {
+            if (strcmp(temp->data.name, name) == 0)
+                return temp;
+            temp = temp->next;
         }
-        temp = temp->next;
+        return NULL;
     }
 
-    cout << "Contact not found.\n";
-}
-
-void updateContact() {
-    char updateName[50];
-    cout << "Enter name to update: ";
-    cin.ignore();
-    cin.getline(updateName, 50);
-
-    Contact *temp = head;
-
-    while (temp != NULL) {
-        if (strcmp(temp->name, updateName) == 0) {
-            cout << "Enter new phone: ";
-            cin.getline(temp->phone, 15);
-
-            cout << "Enter new email: ";
-            cin.getline(temp->email, 50);
-
-            cout << "Contact updated successfully.\n";
-            return;
-        }
-        temp = temp->next;
+    // Update contact (assumes node found)
+    void updateContact(Node* node, const char* newPhone, const char* newEmail) {
+        strcpy(node->data.phone, newPhone);
+        strcpy(node->data.email, newEmail);
     }
 
-    cout << "Contact not found.\n";
-}
+    // Delete by name
+    bool deleteByName(const char* name) {
+        Node* temp = head;
+        Node* prev = NULL;
 
-void deleteContact() {
-    char deleteName[50];
-    cout << "Enter name to delete: ";
-    cin.ignore();
-    cin.getline(deleteName, 50);
-
-    Contact *temp = head;
-    Contact *prev = NULL;
-
-    while (temp != NULL) {
-        if (strcmp(temp->name, deleteName) == 0) {
-            if (prev == NULL) {
-                head = temp->next;
-            } else {
-                prev->next = temp->next;
+        while (temp != NULL) {
+            if (strcmp(temp->data.name, name) == 0) {
+                if (prev == NULL) {
+                    head = temp->next;
+                } else {
+                    prev->next = temp->next;
+                }
+                delete temp;
+                return true;
             }
-            delete temp;
-            cout << "Contact deleted successfully.\n";
-            return;
+            prev = temp;
+            temp = temp->next;
         }
-        prev = temp;
-        temp = temp->next;
+        return false;
     }
 
-    cout << "Contact not found.\n";
-}
+    // Get head (for traversal from outside)
+    Node* getHead() { return head; }
+
+    // Destructor to free memory
+    ~LinkedList() {
+        Node* temp;
+        while (head != NULL) {
+            temp = head;
+            head = head->next;
+            delete temp;
+        }
+    }
+};
 
 #endif
